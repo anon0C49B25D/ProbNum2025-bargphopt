@@ -4,7 +4,6 @@ using LinearAlgebra
 using GaussianProcesses
 
 includet("ARModels.jl"); using .ARModels
-includet("RTSSmoothers.jl"); using .RTSSmoothers
 
 
 function optGP_Mat12(tsteps, signal; max_iters=1)

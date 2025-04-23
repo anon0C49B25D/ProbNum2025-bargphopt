@@ -15,20 +15,6 @@ includet("../../optimization.jl");
 includet("../../evaluation.jl");
 
 
-# function gen_signal(len_time; y_0 = 1.0)
-
-#     λ_true = rand(Beta(10., 4.))
-#     τ_true = rand(Gamma(2., 1.))
-#     σ_true = sqrt(inv(τ_true))
-
-#     global signal = zeros(len_time)
-#     signal[1] = y_0
-#     for k in 2:len_time
-#         global signal[k] = (1 -λ_true*Δt)*signal[k-1] + σ_true*rand(Normal(0,Δt))
-#     end
-#     return signal ./ std(signal)
-# end
-
 function gen_signal_Mat32(tsteps, λ, σ)
 
     N = length(tsteps)

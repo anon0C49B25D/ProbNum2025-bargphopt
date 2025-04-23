@@ -14,19 +14,6 @@ using GaussianProcesses
 includet("../../optimization.jl");
 includet("../../evaluation.jl");
 
-# function gen_signal(len_time; y_0 = 1.0)
-
-#     λ_true = rand(Beta(10., 4.))
-#     τ_true = rand(Gamma(2., 1.))
-#     σ_true = sqrt(inv(τ_true))
-
-#     global signal = zeros(len_time)
-#     signal[1] = y_0
-#     for k in 2:len_time
-#         global signal[k] = (1 -λ_true*Δt)*signal[k-1] + σ_true*rand(Normal(0,Δt))
-#     end
-#     return signal ./ std(signal)
-# end
 
 function gen_signal_Mat32(tsteps, λ, σ)
 
@@ -47,7 +34,7 @@ end
 
 
 # Identities
-experiment_ids = 1:100
+experiment_ids = 1:10
 
 # Time parameters
 Δt = 0.1
@@ -95,8 +82,8 @@ Dx = Dy*M
     
     """Markov Chain Monte Carlo"""
 
-    params_HMC = optMCMC_Mat32(trn_tsteps, trn_signal)    
-    runtime_HMC = @belapsed optMCMC_Mat32(trn_tsteps, trn_signal)    
+    params_HMC = optMCMC_Mat32(trn_tsteps, trn_signal, max_iters=max_iters)    
+    runtime_HMC = @belapsed optMCMC_Mat32(trn_tsteps, trn_signal, max_iters=max_iters)    
     performance_HMC = test_params_Mat32(params_HMC[:ll], params_HMC[:lσ], tst_tsteps, tst_signal) 
 
     "Save results"
